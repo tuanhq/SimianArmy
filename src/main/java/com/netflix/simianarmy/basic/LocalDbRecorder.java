@@ -68,8 +68,13 @@ public class LocalDbRecorder implements MonkeyRecorder {
             dbFilename = configuration.getStrOrElse("simianarmy.recorder.localdb.file", null);
             maxEvents = configuration.getNumOrElse("simianarmy.recorder.localdb.max_events", MAX_EVENTS);
             dbpassword = configuration.getStrOrElse("simianarmy.recorder.localdb.password", null);
+        }else{
+//        	dbFilename="/tmp/simianarmy_events";
+//        	maxEvents=1000;
+//        	dbpassword="123456";
         }
     }
+   
 
     private synchronized void init() {
         if (nextId != null) {
@@ -323,5 +328,6 @@ public class LocalDbRecorder implements MonkeyRecorder {
         for (Event event : events) {
             System.out.println("Got:" + event + ": " + event.eventTime().getTime());
         }
+        System.out.println("Finnish");
     }
 }

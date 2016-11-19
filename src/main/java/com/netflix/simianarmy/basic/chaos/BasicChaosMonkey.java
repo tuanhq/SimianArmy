@@ -256,6 +256,9 @@ public class BasicChaosMonkey extends ChaosMonkey {
      * @param group
      * @return double
      */
+    
+    //neu group = mandatory terminate thi no se lay probabilty cua no
+    // nguoc lai lay probability binh thuong
     protected double getEffectiveProbabilityFromCfg(InstanceGroup group) {
         String propName;
         if (cfg.getBool(NS + "mandatoryTermination.enabled")) {
@@ -300,7 +303,8 @@ public class BasicChaosMonkey extends ChaosMonkey {
         long lastOptInTimeInMilliseconds = (long) cfg.getNumOrElse(prop, -1);
         return lastOptInTimeInMilliseconds;
     }
-
+    ///Kiem tra neu    lastoptIntime < ( now - mandatoryTerminationWindowInDays)
+    // va  tong so lan terminate  cua group do <= 0
     private boolean noTerminationInLastWindow(InstanceGroup group, int mandatoryTerminationWindowInDays) {
     long lastOptInTimeInMilliseconds = getLastOptInMilliseconds(group);
         if (lastOptInTimeInMilliseconds < 0) {
@@ -363,6 +367,8 @@ public class BasicChaosMonkey extends ChaosMonkey {
         Validate.notNull(group);
         Validate.notEmpty(inst);
         String prop = NS + "leashed";
+        
+        //if leashed enable then not kill 
         if (cfg.getBoolOrElse(prop, true)) {
             LOGGER.info("leashed ChaosMonkey prevented from killing {} from group {} [{}], set {}=false",
                     new Object[]{inst, group.name(), group.type(), prop});

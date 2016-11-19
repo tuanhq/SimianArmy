@@ -60,6 +60,7 @@ public class BasicChaosInstanceSelector implements ChaosInstanceSelector {
         }
         return result;
     }
+    //select n instance khac selected 
 
     private Collection<String> selectNInstances(Collection<String> instances, int n, String selected) {
         logger().info("Randomly selecting {} from {} instances, excluding {}",
@@ -76,7 +77,7 @@ public class BasicChaosInstanceSelector implements ChaosInstanceSelector {
         Collections.shuffle(copy);
         return copy.subList(0, n);
     }
-
+    
     private String selectOneInstance(InstanceGroup group, double probability) {
         Validate.isTrue(probability < 1);
         if (probability <= 0) {
